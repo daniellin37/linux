@@ -1,0 +1,193 @@
+﻿Debian apt-get 自動補完
+
+Posted on 2014/10/05
+與 Ubuntu 不同，預設在 Debian 的 bash 下執行 apt-get 是沒有自動補完功能的。如輸入
+
+$ apt-get inst[tab]
+shell 並不會自動補成
+
+$ apt-get install
+因此，需要動一些小手腳，讓 Debian 的 bash 也可以如 ubuntu 一般自動完成 apt-get 套件命令，自動搜尋已安裝或是正要安裝之 package。
+
+修改 /etc/bash.bashrc 或是家目錄下的 .bashrc 檔案，加入以下(有些版本可能已存在於檔案中，將註解取消即可！)
+
+# enable bash completion in interactive shells
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+即可再登入 bash 後啟動 apt-get 等命令之自動補完成功能。
+
+#########################################################################
+安裝pyhton
+
+1. 下载源码
+
+解压安装
+
+[root@localhost src]# pwd
+/usr/local/src
+[root@localhost src]# wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz
+--2015-12-28 16:01:57--  https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz
+Resolving www.python.org... 103.245.222.223
+Connecting to www.python.org|103.245.222.223|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 16856409 (16M) [application/octet-stream]
+Saving to: "Python-2.7.11.tgz"
+
+100%[=================================================================================>] 16,856,409   350K/s   in 48s     
+
+2015-12-28 16:02:45 (346 KB/s) - "Python-2.7.11.tgz" saved [16856409/16856409]
+
+[root@localhost src]# tar xf Python-2.7.11.tgz 
+安装
+
+安装python
+cd Python-2.7.11
+./configure --prefix=/usr/local/python27
+make
+make install
+此处漫长的等待,完成之后:
+
+[root@localhost python2.7]# pwd
+/usr/local/python2.7
+[root@localhost python2.7]# ls
+bin  include  lib  share
+[root@localhost python2.7]# 
+
+建立软链接:
+
+[root@localhost python2.7]# ln -s /usr/local/python2.7/bin/python2.7  /usr/bin/python2.7
+完成!
+
+[root@localhost ~]# python2.7
+Python 2.7.11 (default, Dec 28 2015, 16:07:42) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit()
+[root@localhost ~]# 
+
+#######################################################
+安裝pip
+
+1下載pip
+root@ubuntu:/home/daniel# wget https://pypi.python.org/packages/source/p/pip/pip-8.1.1.tar.gz#md5=6b86f11841e89c8241d689956ba99ed7
+
+2.解壓縮下載檔
+root@ubuntu:/home/daniel# tar xf pip-8.1.1.tar.gz 
+
+3.下載安裝pip套件
+root@ubuntu:/home/daniel# wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
+
+4.到下載pip檔解壓縮位置
+root@ubuntu:/home/daniel# cd pip-8.1.1/
+
+5.用python.py安裝pip
+root@ubuntu:/home/daniel# python setup.py install
+
+######################################################################################
+安裝ipythonnotebook
+
+a)  安装pip工具
+终端输入以下命令：
+sudo apt-get install python-pip
+
+b) 安装ipython
+终端输入以下命令：
+sudo apt-get install ipython
+
+c) 安装ipython[notebook]
+终端输入以下命令：
+sudo apt-get install ipython-notebook
+d) 启动ipython[notebook]
+终端输入以下命令：
+ipython notebook
+
+###########################################################################
+安裝DJANGO
+
+sudo pip install Django
+
+###########################################################################
+安裝pyhton virtualenv(ubntu)
+
+sudo apt-get install python-virtualenv
+
+#######################################################
+建立虛擬環境virtualenv 
+
+virtualenv mysite_venv
+
+##################################################
+安裝完python->安裝virtualenv->再從虛擬機上安裝django
+啟動virtualenv
+source ~/djangoweb/mysite_venv/bin/activate
+
+#################################################
+建立project
+
+django-admin.py startproject mysite
+
+################################################
+開啟server
+cd mysite
+python manage.py runserver
+
+################################################
+建立APP
+pyhton manage.py startapp excuse
+
+#########################################################
+
+安裝sublime 3
+
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installer
+
+#########################################################
+確認ubntu 版本及位元數
+
+file /sbin/init
+
+#########################################################
+確認java版本
+
+java -version
+
+#########################################################
+
+下載java jre-8u77-linux-x64.tar.gz
+wget http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207221 -O jre-8u77-linux-x64.tar.gz
+
+###########################################################
+
+下載java jdk-8u77-linux-x64.tar.gz
+
+用瀏覽器去下載jdk-8u77-linux-x64.tar.gz
+
+###########################################################
+建立java安裝資料夾
+
+sudo mkdir -p /usr/local/java
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
