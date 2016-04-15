@@ -175,6 +175,7 @@ wget http://javadl.oracle.com/webapps/download/AutoDL?BundleId=207221 -O jre-8u7
 
 sudo mkdir -p /usr/local/java
 
+google
 
 
 
